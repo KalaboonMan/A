@@ -1,0 +1,8 @@
+<title>รายการวิชา</title>
+<div id="course-list">
+    <ul>
+        {% for course in courses %}
+            <li>{{ course['name'] }}</li>
+        {% endfor %}
+    </ul>
+</div>
