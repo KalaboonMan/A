@@ -1,0 +1,50 @@
+สิ่งที่ทำให้ได้
+- สร้าง repository ใหม่
+- สร้าง web project พร้อม .gitignore
+- commit push
+- ลบ directory แล้ว clone ใหม่
+- สร้างและแก้ไข branch ตามชื่อฟังก์ชัน
+- เพิ่มฟังก์ชันบนเว็บตามที่กำหนด
+- commit push
+
+สิ่งที่ทำให้ได้
+- สร้าง repository ใหม่ 
+(สร้าง บน github)
+
+- สร้าง web project พร้อม .gitignore
+(เขียนในพาวเวอร์เชล)
+mkdir <ชื่อโฟเดอร์> test
+cd <ชื่อโฟเดอร์>
+python -m venv <ชื่อenv>
+.\<ชื่อenv>\Scripts\activate
+pip install Flask
+pip freeze
+
+gh auth login
+gh repo clone KanjanaPS/dstoolbox-A
+
+cd .\dstoolbox-test\
+
+start .
+
+(git config --global user.email "kanjana.ph.64@ubu.ac.th"
+git config --global user.name "KanjanaPS") ไม่ต้องเขียนก็ได้ เดี๋ยวไม่ทัน
+
+
+(เปิด vscode select โฟลเดอร์ KanjanaPS/dstoolbox-A ที่เพิ่ง clone มา)
+.\<ชื่อenv>\Scripts\activate
+
+- สร้างและแก้ไข branch ตามชื่อฟังก์ชัน
+git branch (แสดงชื่อ branch)
+***(ทำอันนี้)git checkout -b <ชื่อ branch> ห้ามตั้งชื่อเว้น (สลับและสร้าง branch)          
+git branch -d <ชื่อ branch> (การลบ branch)
+git checkout <ชื่อ branch> (การสลับ branch)
+git checkout master (การสลับ branch หลัก) 
+
+ กดเพิ่มไฟล์ app.py ได้เลย
+เขียนฟังก์ชันที่ต้องการ ต้องเอา index เข้ามาด้วย 
+หลังจากเขียนเสร็จกดเพิ่มโฟลเดอร์ templates
+และสร้างไฟล์ index.html + สร้างไฟล์ฟังก์ชันที่ต้องการ 
+git add .
+git commit -m "commit"
+ python app.py

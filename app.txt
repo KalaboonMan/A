@@ -1,0 +1,65 @@
+app.py
+from flask import Flask , render_template, request, redirect , url_for
+
+app = Flask(__name__)
+
+courses = [
+    {'code' : 'TH001', 'name': 'Thai'},
+    {'code' : 'Eng002', 'name': 'English'},
+    {'code' : 'IR003', 'name': 'IR'},
+]
+
+@app.route('/')
+def index():
+    return render_template('index.html', courses = courses)
+
+@app.route('/search', methods=['GET','POST'])
+def search():
+    result = None
+    
+    if request.method == 'POST':
+        course_code = request.form.get('course_code')
+        result = next((course for course in courses if course['code'] == course_code), None)
+        
+    return render_template('search.html', result=result)
+
+@app.route('/search_by_name', methods=['GET','POST'])
+def search_by_name():
+    result = None
+    
+    if request.method == 'POST':
+        course_name = request.form.get('course_name')
+        result = next((course for course in courses if course['name'] == course_name), None)
+        
+    return render_template('search_by_name.html', result=result)
+
+@app.route('/edit_course/<code>', methods=['GET','POST'])
+def edit_course(code):
+    result = next((course for course in courses if course['code'] == code), None)
+    
+    if result is None:
+        return redirect(url_for('index'))
+    
+    if request.method == 'POST':
+        result['name'] = request.form.get('course_name')
+        
+        return redirect(url_for('index'))
+    
+    return render_template('edit_course.html', result=result)
+
+@app.route('/delete_course/<code>', methods=['GET','POST'])
+def delete_course(code):
+    result = next((course for course in courses if course['code'] == code), None)
+    
+    if result is None:
+        return redirect(url_for('index'))
+    
+    if request.method == 'POST':
+        courses.remove(result)
+        
+        return redirect(url_for('index'))
+    
+    return render_template('delete_course.html', result=result)
+
+if __name__ == '__main__':
+    app.run(debug=True)

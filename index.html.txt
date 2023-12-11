@@ -1,0 +1,66 @@
+0000
+index.html
+<title>รายการวิชา</title>
+<div id="course-list">
+    <ul>
+        {% for course in courses %}
+            <li>{{ course['name'] }}</li>
+        {% endfor %}
+    </ul>
+</div>
+
+
+search.html
+<title>ค้นหารายวิชา</title>
+<h1>ค้นหารายวิชา</h1>
+<form action="{{ url_for('search') }}" method="post">
+    <label for="course_code">รหัสวิชา</label>
+    <input type="text" id="course_code" name="course_code" requried>
+    <button type="submit">ค้นหา</button>
+</form>
+{% if result %}
+    <div id="search-result">
+        <h2>ผลลัพธ์การค้นหา</h2>
+        <p>รหัสวิชา: {{ result['code'] }}</p>
+        <p>ชื่อวิชา:{{ result['name'] }}</p>
+    </div>
+{% endif %}
+
+
+
+search_by_name.html
+<title>ค้นหารายวิชา</title>
+<h1>ค้นหารายวิชา</h1>
+<form action="{{ url_for('search_by_name') }}" method="post">
+    <label for="course_name">ชื่อวิชา</label>
+    <input type="text" id="course_name" name="course_name" requried>
+    <button type="submit">ค้นหา</button>
+</form>
+{% if result %}
+    <div id="search-result">
+        <h2>ผลลัพธ์การค้นหา</h2>
+        <p>รหัสวิชา: {{ result['code'] }}</p>
+        <p>ชื่อวิชา:{{ result['name'] }}</p>
+    </div>
+{% endif %}
+
+
+edit_course.html
+<title>แก้ไขข้อมูลรายวิชา</title>
+<h1>แก้ไขข้อมูลรายวิชา</h1>
+<form action="{{ url_for('edit_course'), code=result['code'] }}" method="post">
+    <label for="course_name">ชื่อวิชา</label>
+    <input type="text" id="course_name" name="course_name" value="{{ result['name'] }}" requried>
+    <button type="submit">บันทึก</button>
+</form>
+
+
+
+delete_course.html
+<title>ลบรายวิชา</title>
+<h1>ลบรายวิชา</h1>
+<p>คุณแน่ใจหรือไม่ที่ต้องการลบรายวิชา "{{ result['name'] }}" (รหัสวิชา: {{ result['code']  }})?</p>
+<form action="{{ url_for('delete_course'), code=result['code'] }}" method="post">
+    <button type="submit">ลบ</button>
+    <a href="{{ url_for('index') }}">ยกเลิก</a>
+</form>
